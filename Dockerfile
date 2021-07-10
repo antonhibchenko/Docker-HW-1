@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y apache2
 RUN groupadd -r hillel_devops && useradd -r -s /bin/bash -m -g hillel_devops hillel_devops && /usr/sbin/a2dissite 000-default.conf
 
 COPY apacheports.conf /etc/apache2/
-COPY virtualhost.conf /etc/apache2/sites-enabled/
+COPY virtualhost.conf /etc/apache2/sites-available/
+
+RUN ln -s /etc/apache2/sites-available/virtualhost.conf /etc/apache2/sites-enabled/virtualhost.conf
 
 WORKDIR /var/www/html/
 
