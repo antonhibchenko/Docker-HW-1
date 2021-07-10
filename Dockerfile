@@ -9,8 +9,8 @@ ENV APACHE_VERSION="2.4.29-1ubuntu4.16"
 RUN apt-get update && apt-get install -y apache2=${APACHE_VERSION}
 RUN groupadd -r hillel_devops && useradd -r -s /bin/bash -m -g hillel_devops hillel_devops && /usr/sbin/a2dissite 000-default.conf
 
-ADD ["/home/ubuntu/Docker/apacheports.conf", "/etc/apache2/"]
-ADD ["/home/ubuntu/Docker/virtualhost.conf", "/etc/apache2/sites-enabled/"]
+COPY ["/home/ubuntu/Docker/apacheports.conf", "/etc/apache2/"]
+COPY ["/home/ubuntu/Docker/virtualhost.conf", "/etc/apache2/sites-enabled/"]
 
 WORKDIR /var/www/html/
 
