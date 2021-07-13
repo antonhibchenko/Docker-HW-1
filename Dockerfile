@@ -4,13 +4,15 @@
 FROM ubuntu:18.04
 MAINTAINER Anton Hibchenko <sl1pgcp@gmail.com>
 
-RUN apt-get update && apt-get install -y apache2
-RUN groupadd -r hillel_devops && useradd -r -s /bin/bash -m -g hillel_devops hillel_devops && /usr/sbin/a2dissite 000-default.conf
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    groupadd -r hillel_devops && \
+    useradd -r -s /bin/bash -m -g hillel_devops hillel_devops && \
+    /usr/sbin/a2dissite 000-default.conf && \
+    ln -s /etc/apache2/sites-available/virtualhost.conf /etc/apache2/sites-enabled/virtualhost.conf
 
 COPY apacheports.conf /etc/apache2/
 COPY virtualhost.conf /etc/apache2/sites-available/
-
-RUN ln -s /etc/apache2/sites-available/virtualhost.conf /etc/apache2/sites-enabled/virtualhost.conf
 
 WORKDIR /var/www/html/
 
